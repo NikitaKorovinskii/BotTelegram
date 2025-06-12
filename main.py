@@ -1,15 +1,17 @@
-from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, CallbackQueryHandler, ConversationHandler, filters
+from telegram.ext import (
+    ApplicationBuilder, CommandHandler, MessageHandler,
+    CallbackQueryHandler, ConversationHandler, filters
+)
 from handlers import (
     start, main_menu_handler, button_handler, export_handler,
     add_start_callback, exercise_chosen, receive_new_exercise,
     receive_reps, receive_weight, error_handler,
     CHOOSING_EXERCISE, TYPING_NEW_EXERCISE, TYPING_REPS, TYPING_WEIGHT
 )
-
 from dotenv import load_dotenv
 import os
 
-load_dotenv()  # загружаем переменные из .env
+load_dotenv()
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
@@ -40,6 +42,7 @@ def main():
 
     print("🚀 Бот запущен и готов к работе!")
     app.run_polling()
+
 
 if __name__ == "__main__":
     main()

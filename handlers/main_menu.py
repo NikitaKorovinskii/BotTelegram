@@ -1,4 +1,7 @@
-from telegram import InlineKeyboardMarkup, InlineKeyboardButton
+import os
+import sys
+
+from telegram import InlineKeyboardMarkup, InlineKeyboardButton, Update
 from telegram.ext import ContextTypes
 from utils.excel_utils import get_user_exercises
 from handlers.constants import MAIN_MENU
@@ -41,3 +44,9 @@ async def main_menu_handler(update, context: ContextTypes.DEFAULT_TYPE):
             f"😅 Хм, {name}, я не понял эту команду. "
             "Пожалуйста, выбирай действие через кнопки ниже 👇"
         )
+
+async def restart_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user = update.effective_user
+    await update.message.reply_text("♻️ Бот перезапускается...")
+    os.execl(sys.executable, sys.executable, *sys.argv)
+

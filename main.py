@@ -1,13 +1,14 @@
 from telegram.ext import (
     ApplicationBuilder, CommandHandler, MessageHandler,
-    CallbackQueryHandler, ConversationHandler, filters
+    CallbackQueryHandler, ConversationHandler, filters,
 )
 from handlers import (
     start, main_menu_handler, button_handler, export_handler,
-    add_start_callback, exercise_chosen, receive_new_exercise,
+    add_start_callback, exercise_chosen, receive_new_exercise, restart_command,
     receive_reps, receive_weight, error_handler,
     CHOOSING_EXERCISE, TYPING_NEW_EXERCISE, TYPING_REPS, TYPING_WEIGHT
 )
+
 from dotenv import load_dotenv
 import os
 
@@ -37,6 +38,7 @@ def main():
     app.add_handler(conv_handler)
 
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_handler))
+    app.add_handler(CommandHandler("restart", restart_command))  # 👈 регистрация команды
     app.add_handler(CallbackQueryHandler(button_handler, pattern="^graph_"))
     app.add_handler(CallbackQueryHandler(export_handler, pattern="^export_stats$"))
 

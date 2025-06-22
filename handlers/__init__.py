@@ -1,4 +1,4 @@
-from .main_menu import start, main_menu_handler
+from .main_menu import start, main_menu_handler, restart_command
 from .button_handlers import button_handler, export_handler
 from .conversation_handlers import (
     add_start_callback, exercise_chosen, receive_new_exercise,
